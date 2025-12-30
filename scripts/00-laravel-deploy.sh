@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
-echo "Running composer..."
-composer install --no-dev --working-dir=/var/www/html
 
-echo "Caching config..."
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+echo "📂 Caching configuration..."
 php artisan config:cache
-
-echo "Caching routes..."
 php artisan route:cache
+php artisan view:cache
 
-echo "Running migrations..."
+echo "🚀 Running migrations..."
 php artisan migrate --force
+
+echo "✅ Deployment ready!"

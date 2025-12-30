@@ -1,23 +1,16 @@
-FROM richarvey/nginx-php-fpm:3.1.6
+# Use the modern ServerSideUp image with PHP 8.4
+FROM serversideup/php:8.4-fpm-nginx
 
+# Set the working directory
+WORKDIR /var/www/html
+
+# Copy all your files to the container
 COPY . .
 
-# Image config
-ENV SKIP_COMPOSER 0
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-
-# Allow Composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-# Install dependencies
+# Install Composer dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Copy the deploy script and make it executable
-COPY scripts/00-laravel-deploy.sh /conf/scripts/00-laravel-deploy.sh
-RUN chmod +x /conf/scripts/00-laravel-deploy.sh
-
-CMD ["/start.sh"]
+# Setup the migration script to run automatically
+# ServerSideUp runs any script in /etc/entrypoint.d/ on startup
+COPY scripts/00-laravel-deploy.sh /etc/entrypoint.d/99-laravel-deploy.sh
+RUN chmod +x /etc/entrypoint.d/99-laravel-deploy.sh
