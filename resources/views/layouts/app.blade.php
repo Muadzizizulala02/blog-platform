@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    {{-- FAVICON LINK --}}
+    <link rel="icon" href="{{ asset('blogging.png') }}">
     
     {{-- Page title - defaults to "Blog Platform" --}}
     <title>{{ $title ?? 'Blog Platform' }}</title>
