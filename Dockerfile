@@ -1,15 +1,16 @@
-# Use the modern ServerSideUp image with PHP 8.4
 FROM serversideup/php:8.4-fpm-nginx
 
-# Set the working directory
-WORKDIR /var/www/html
-
-# Copy all files AND set permissions to the web user (www-data)
-COPY --chown=www-data:www-data . .
-
-# Install Composer dependencies
-RUN composer install --no-dev --optimize-autoloader
-
-# Setup the migration script (Run as root so it can execute system tasks if needed)
+# 1. Switch to root to install the system deployment script
+USER root
 COPY scripts/00-laravel-deploy.sh /etc/entrypoint.d/99-laravel-deploy.sh
 RUN chmod +x /etc/entrypoint.d/99-laravel-deploy.sh
+
+# 2. Switch back to the web user for application installation
+USER www-data
+WORKDIR /var/www/html
+
+# 3. Copy app files with correct ownership
+COPY --chown=www-data:www-data . .
+
+# 4. Install dependencies
+RUN composer install --no-dev --optimize-autoloader
