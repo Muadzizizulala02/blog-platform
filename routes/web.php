@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 // Homepage - shows all blog posts
 Route::get('/', [BlogController::class, 'index'])->name('home');
 
+// ✅ MOVED HERE: Dashboard (Now public)
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
 // View single post by slug
 Route::get('/post/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
@@ -50,10 +55,7 @@ Route::get('auth/google/callback', [GoogleAuthController::class, 'handleGoogleCa
 
 Route::middleware('auth')->group(function () {
     
-    // Dashboard
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // (Dashboard was removed from here)
 
     // Profile management (from Breeze)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -81,23 +83,12 @@ Route::middleware('auth')->group(function () {
 |--------------------------------------------------------------------------
 */
 
-// Prefix all admin routes with '/admin'
-// Apply 'auth' middleware (must be logged in)
-// Apply 'admin' middleware (must have admin role)
 Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->name('admin.')
     ->group(function () {
         
         // Posts CRUD
-        // resource() creates all RESTful routes automatically:
-        // GET    /admin/posts          -> index   (list all)
-        // GET    /admin/posts/create   -> create  (show form)
-        // POST   /admin/posts          -> store   (save new)
-        // GET    /admin/posts/{id}     -> show    (view one)
-        // GET    /admin/posts/{id}/edit -> edit   (show edit form)
-        // PUT    /admin/posts/{id}     -> update  (save changes)
-        // DELETE /admin/posts/{id}     -> destroy (delete)
         Route::resource('posts', AdminPostController::class);
         
         // Categories CRUD
@@ -117,5 +108,4 @@ Route::prefix('admin')
             ->name('comments.destroy');
     });
 
-// Include authentication routes from Breeze (login, register, etc.)
 require __DIR__.'/auth.php';

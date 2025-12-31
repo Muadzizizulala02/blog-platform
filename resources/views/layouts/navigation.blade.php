@@ -23,11 +23,11 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                            {{ __('Dashboard') }}
-                        </x-nav-link>
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
 
+                    @auth
                         @if (auth()->user()->isAdmin())
                             <div x-data="{ adminOpen: false }" @click.outside="adminOpen = false" class="relative flex">
                                 <button @click="adminOpen = !adminOpen" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:border-gray-300 dark:hover:border-gray-600 focus:outline-none transition duration-150 ease-in-out">
@@ -115,11 +115,11 @@
                 {{ __('Home') }}
             </x-responsive-nav-link>
 
-            @auth
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('Dashboard') }}
-                </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
 
+            @auth
                 @if (auth()->user()->isAdmin())
                     <div class="border-t border-gray-200 dark:border-gray-600 pt-2 mt-2">
                         <div class="px-4 text-xs font-semibold text-gray-500 uppercase">Admin Controls</div>
