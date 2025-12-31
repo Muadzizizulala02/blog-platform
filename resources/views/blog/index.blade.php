@@ -4,8 +4,15 @@
 
     {{-- Page header --}}
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100 ">
-            Yo, {{ Auth::user()->name }}! 🤯 </h2>
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-100">
+            @auth
+                {{-- If Logged In --}}
+                Yo, {{ Auth::user()->name }}! 🤯
+            @else
+                {{-- If Guest (Not Logged In) --}}
+                Welcome to the Blog! 👋
+            @endauth
+        </h2>
     </x-slot>
 
     <div class="py-3">
