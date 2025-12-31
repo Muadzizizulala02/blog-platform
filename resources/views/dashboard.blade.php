@@ -10,6 +10,11 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
+                        <h3 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 flex items-center gap-2">
+                            Yo, {{ Auth::user()->name }}! 🤙
+                        </h3>
+                    </div>
 
                     <div class="prose dark:prose-invert max-w-none text-lg leading-relaxed space-y-4">
                         <p>
@@ -29,8 +34,8 @@
                             </p>
                             <ul class="list-disc list-inside text-sm text-yellow-700 dark:text-yellow-200 space-y-1">
                                 <li>Buttons that click but do absolutely nothing.</li>
-                                <li>Dark mode might flash-bang your eyes unexpectedly.</li>
                                 <li>If you find a bug, congrats! You found a feature. 🐛</li>
+                                <li><strong>It might be slow.</strong> because of the free tier of Render and TiDB. I'm too cheap to pay for servers. 🐢</li>
                             </ul>
                         </div>
                     </div>
@@ -46,7 +51,7 @@
                             </a>
 
                             <a href="https://www.linkedin.com/in/muadzkhalid" target="_blank" class="inline-flex items-center px-4 py-2 bg-[#0077b5] border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-[#00669c] focus:outline-none focus:ring-2 focus:ring-[#0077b5] focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition ease-in-out duration-150">
-                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.063 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
                                 LinkedIn
                             </a>
                         </div>
