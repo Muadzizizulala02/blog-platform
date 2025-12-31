@@ -8,8 +8,10 @@
         </h2>
     </x-slot>
 
+    {{-- ✅ MATCHED: Updated py-3 and max-w-7xl to match your index page --}}
     <div class="py-3">
-        <div class="max-w-1xl mx-auto sm:px-1 lg:px-1">
+        <div class="max-w-7xl mx-auto sm:px-1 lg:px-1">
+            
             {{-- Main post content --}}
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -42,7 +44,7 @@
                         {!! nl2br(e($post->content)) !!}
                     </div>
 
-                    {{-- Like/Dislike buttons (only for authenticated users) --}}
+                    {{-- Like/Dislike buttons --}}
                     @auth
                         <div class="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                             <form action="{{ route('posts.like', $post) }}" method="POST">
@@ -59,7 +61,7 @@
                             <form action="{{ route('posts.dislike', $post) }}" method="POST">
                                 @csrf
                                 <button type="submit" 
-                                        class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white rounded\">
+                                        class="flex items-center gap-2 px-4 py-2 bg-red-500 hover:bg-red-600 dark:bg-red-600 dark:hover:bg-red-700 text-white rounded">
                                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z"/>
                                     </svg>
@@ -78,7 +80,6 @@
                         Comments ({{ $comments->count() }})
                     </h3>
 
-                    {{-- Comment form (only for authenticated users) --}}
                     @auth
                         <form action="{{ route('comments.store', $post) }}" method="POST" class="mb-6">
                             @csrf
@@ -94,7 +95,6 @@
                                     required
                                     placeholder="Share your thoughts...">{{ old('content') }}</textarea>
                                 
-                                {{-- Validation error for content field --}}
                                 @error('content')
                                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                                 @enderror
@@ -112,7 +112,6 @@
                         </p>
                     @endauth
 
-                    {{-- Display approved comments --}}
                     @if($comments->count() > 0)
                         <div class="space-y-4">
                             @foreach($comments as $comment)
@@ -125,7 +124,6 @@
                                             </p>
                                         </div>
                                         
-                                        {{-- Delete button (only for comment owner) --}}
                                         @auth
                                             @if(auth()->id() === $comment->user_id)
                                                 <form action="{{ route('comments.destroy', $comment) }}" 
